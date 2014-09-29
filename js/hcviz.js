@@ -70,7 +70,7 @@ d3.json("data/topic.json", function(error, root) {
   zoomTo([root.x, root.y, root.r * 2 + margin]);
 
   function clearTable() {
-    d3.select("table").selectAll("tr").remove();
+    d3.select("table").selectAll("#dynamicCol").remove();
   }
 
   function refreshTable(d) {
@@ -78,8 +78,8 @@ d3.json("data/topic.json", function(error, root) {
       for (var i = 0; i < d.tag.length; i++) {
         var j = d.tag[i];
       	var row = d3.select("#dataTable").append("tr");
-        row.append("td").text(j.name);
-        row.append("td").text(j.count);
+        row.append("td").attr("id", "dynamicCol").text(j.name);
+        row.append("td").attr("id", "dynamicCol").text(j.count);
       }
       return;
     }
