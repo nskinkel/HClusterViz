@@ -9,16 +9,18 @@
 <body>
     
     <div class="row">
-      <div id="clusterDiv" name="clusterDiv" class="col-md-8"></div>
+      <div id="clusterDiv" name="clusterDiv" class="col-md-6"></div>
 
-      <div class="col-md-4">
-          <table id="dataTable" name="dataTable" class="table">
+      <div class="col-md-4" style="height:100vh;overflow:auto;">
+          <table id="dataTable" name="dataTable" class="table table-striped table-hover">
             <thead>
-              <tr>
+              <tr class="header">
                 <th>Tag</th>
                 <th>Count</th>
               </tr>
             </thead>
+            <tbody>
+            </tbody>
           </table>
       </div>
     </div>
@@ -26,6 +28,8 @@
 </body>
 
 <script src="js/lib/d3.v3.min.js"></script>
+<script src="js/lib/jquery-1.11.1.min.js"></script>
+<script src="js/lib/bootstrap.min.js"></script>
 <script src="js/hcviz.js"></script>
 
 </html>

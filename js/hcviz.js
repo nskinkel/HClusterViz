@@ -62,7 +62,7 @@ d3.json("data/topic.json", function(error, root) {
 
   var node = svg.selectAll("circle,text");
 
-  d3.select("body")
+  d3.select("#clusterDiv")
       .style("background", color(-1))
 
   d3.select("#clusterDiv").on("click", function() { zoom(root); });
@@ -77,7 +77,7 @@ d3.json("data/topic.json", function(error, root) {
     if (d.children === undefined) {
       for (var i = 0; i < d.tag.length; i++) {
         var j = d.tag[i];
-      	var row = d3.select("#dataTable").append("tr");
+      	var row = d3.select("tbody").append("tr");
         row.append("td").attr("id", "dynamicCol").text(j.name);
         row.append("td").attr("id", "dynamicCol").text(j.count);
       }
