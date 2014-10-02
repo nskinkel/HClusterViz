@@ -1,5 +1,6 @@
 var margin = 20,
-    diameter = 960;
+    diameter = $(window).height();
+//	diameter = 960;
 
 var color = d3.scale.linear()
     .domain([-1, 5])
@@ -9,26 +10,48 @@ var color = d3.scale.linear()
 var pack = d3.layout.pack()
     .padding(2)
     .size([diameter - margin, diameter - margin])
-    .value(function(d) { return d.size; })
+    .value(function(d) { return d.size; });
 
+var size = diameter + margin;
+d3.select("#clusterDiv")
+	.style("width", ""+ size + "px");
+    
 var svg = d3.select("#clusterDiv").append("svg")
     .attr("width", diameter)
     .attr("height", diameter)
   .append("g")
     .attr("transform", "translate(" + diameter / 2 + "," + diameter / 2 + ")");
 
-d3.json("data/topic.json", function(error, root) {
+d3.json("data/test.json", function(error, root) {
   if (error) return console.error(error);
 
   var focus = root,
       nodes = pack.nodes(root),
       view;
-
+  
+//  var tooltip = d3.select("body")
+//  	.append("div")
+//  	.style("position", "absolute")
+//  	.style("z-index", "10")
+//  	.style("width", "60px")
+//  	.style("height", "28px")
+//  	.style("font", "12px sans-serif")
+//  	.style("padding", "2px")
+//  	.style("text-align", "left")
+//  	.style("background", "lightsteelblue")
+//  	.style("border-radius", "6px")
+//  	.style("visibility", "hidden");
+  
   var circle = svg.selectAll("circle")
       .data(nodes)
     .enter().append("circle")
       .attr("class", function(d) { return d.parent ? d.children ? "node" : "node node--leaf" : "node node--root"; })
       .style("fill", function(d) { return d.children ? color(d.depth) : null; })
+//      .on("mouseover", function(d){
+//    	  tooltip.text(d.tag[0].name + "\n" + d.tag[1].name + "\n" + d.tag[3].name + "\n" + d.tag[3].name + "\n" + d.tag[4].name);
+//    	  return tooltip.style("visibility","visible");})
+//      .on("mousemove", function(){return tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
+//      .on("mouseout", function(){return tooltip.style("visibility", "hidden");})
       .on("click", function(d) { 
             if (focus !== d) {
                 zoom(d); 
